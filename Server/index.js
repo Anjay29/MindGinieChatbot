@@ -10,7 +10,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-app.use(cors());
+const corsOptions = {
+  origin: 'http://localhost:3000', // Replace with your frontend URL if hosted elsewhere
+  optionsSuccessStatus: 200,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
 app.post('/chat', async (req, res) => {
