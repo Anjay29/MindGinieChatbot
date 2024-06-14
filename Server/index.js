@@ -11,7 +11,7 @@ const openai = new OpenAI({
 });
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with your frontend URL if hosted elsewhere
+  origin: 'https://mind-ginie-chatbot-v10-s1salieso-anjay29s-projects.vercel.app/', 
   optionsSuccessStatus: 200,
 };
 
