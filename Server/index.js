@@ -10,12 +10,12 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const corsOptions = {
-  origin: ['https://mindginie.vercel.app/', 'http://localhost:3000'], 
-  optionsSuccessStatus: 200,
-};
+// const corsOptions = {
+//   origin: ['https://mindginie.vercel.app/', 'http://localhost:3000'], 
+//   optionsSuccessStatus: 200,
+// };
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 
 app.post('/chat', async (req, res) => {
