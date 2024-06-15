@@ -11,12 +11,18 @@ const openai = new OpenAI({
 });
 
 const corsOptions = {
-  origin: ['https://mindginie-chatbot-v1.netlify.app/', 'http://localhost:3000'], 
+  origin: ['https://mindginie-chatbot-v1.netlify.app', 'http://localhost:3000'],
   optionsSuccessStatus: 200,
 };
 
+app.use((req, res, next) => {
+  console.log(`CORS middleware triggered for origin: ${req.headers.origin}`);
+  next();
+});
 app.use(cors(corsOptions));
 app.use(express.json());
+
+app.options('*', cors(corsOptions)); // Add this to handle preflight requests
 
 app.post('/chat', async (req, res) => {
   const { userText } = req.body;
@@ -31,7 +37,7 @@ app.post('/chat', async (req, res) => {
     const botMessageContent = completion.choices[0].message.content.trim();
     res.json({ botMessage: botMessageContent });
   } catch (error) {
-    console.error('Error sending message:-', error);
+    console.error('Error sending message:', error);
     res.status(500).json({ error: 'Error processing request' });
   }
 });
