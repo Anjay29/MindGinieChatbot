@@ -11,7 +11,7 @@ const openai = new OpenAI({
 });
 
 const corsOptions = {
-  origin: ['https://mind-ginie-chatbot-v10-anjay29s-projects.vercel.app/', 'http://localhost:3000'], 
+  origin: ['https://mindginie-chatbot-v1.netlify.app/', 'http://localhost:3000'], 
   optionsSuccessStatus: 200,
 };
 
