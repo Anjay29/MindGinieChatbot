@@ -12,7 +12,7 @@
       "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://mindginie-chatbot-v1.netlify.app"
+          "value": "*"
         },
         {
           "key": "Access-Control-Allow-Methods",

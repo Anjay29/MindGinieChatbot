@@ -64,7 +64,7 @@ const ChatBot = () => {
     try {
       setBotTyping(true);
       setTypingInterrupted(false);
-      const response = await axios.post('https://mind-ginie-chatbot-v1.vercel.app/chat', { userText });
+      const response = await axios.post('https://mind-ginie-chatbot-backend.vercel.app/chat', { userText });
       const botMessageContent = response.data.botMessage;
       typeBotMessage(botMessageContent);
     } catch (error) {

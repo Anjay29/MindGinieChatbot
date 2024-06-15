@@ -10,19 +10,26 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
+const allowedOrigins = [
+  'https://mindginie-chatbot-v1.netlify.app',
+  'http://localhost:3000'
+];
+
 const corsOptions = {
-  origin: ['https://mindginie-chatbot-v1.netlify.app', 'http://localhost:3000'],
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   optionsSuccessStatus: 200,
 };
 
-app.use((req, res, next) => {
-  console.log(`CORS middleware triggered for origin: ${req.headers.origin}`);
-  next();
-});
 app.use(cors(corsOptions));
 app.use(express.json());
 
-app.options('*', cors(corsOptions)); // Add this to handle preflight requests
+app.options('*', cors(corsOptions)); // Handle preflight requests
 
 app.post('/chat', async (req, res) => {
   const { userText } = req.body;
