@@ -11,7 +11,7 @@ const openai = new OpenAI({
 });
 
 const corsOptions = {
-  origin: ['https://mind-ginie-chatbot-v10-s1salieso-anjay29s-projects.vercel.app/', 'http://localhost:3000'], 
+  origin: ['https://mind-ginie-chatbot-v10-anjay29s-projects.vercel.app/', 'http://localhost:3000'], 
   optionsSuccessStatus: 200,
 };
 
@@ -31,7 +31,7 @@ app.post('/chat', async (req, res) => {
     const botMessageContent = completion.choices[0].message.content.trim();
     res.json({ botMessage: botMessageContent });
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error('Error sending message:-', error);
     res.status(500).json({ error: 'Error processing request' });
   }
 });
