@@ -10,28 +10,13 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-const allowedOrigins = [
-  'https://mindginie-chatbot-v1.netlify.app',
-  'http://localhost:3000'
-];
-
 const corsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
-  preflightContinue: false,
-  optionsSuccessStatus: 204
+  origin: ['https://mindginie-chatbot-v1.netlify.app/', 'http://localhost:3000'], 
+  optionsSuccessStatus: 200,
 };
 
 app.use(cors(corsOptions));
 app.use(express.json());
-
-app.options('*', cors(corsOptions)); // Handle preflight requests
 
 app.post('/chat', async (req, res) => {
   const { userText } = req.body;
@@ -46,7 +31,7 @@ app.post('/chat', async (req, res) => {
     const botMessageContent = completion.choices[0].message.content.trim();
     res.json({ botMessage: botMessageContent });
   } catch (error) {
-    console.error('Error sending message:', error);
+    console.error('Error sending message:-', error);
     res.status(500).json({ error: 'Error processing request' });
   }
 });
